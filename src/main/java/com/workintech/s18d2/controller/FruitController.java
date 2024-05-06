@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/fruit")
 public class FruitController {
     private FruitService fruitService;
@@ -23,7 +23,7 @@ public class FruitController {
     public List<Fruit> get(){ return fruitService.getByPriceAsc();}
 
     @GetMapping("/{id}")
-    public Fruit getById(@Positive @PathVariable Long id){return fruitService.getById(id);}
+    public Fruit getById(@Positive @PathVariable("id") Long id){return fruitService.getById(id);}
 
     @GetMapping("/desc")
     public List<Fruit> getDesc(){return fruitService.getByPriceDesc();}
@@ -32,8 +32,8 @@ public class FruitController {
     public Fruit save(@Validated @RequestBody Fruit fruit){return  fruitService.save(fruit);}
 
     @GetMapping("/name/{name}")
-    public List<Fruit> searchByName(@PathVariable String name){return fruitService.searchByName(name);}
+    public List<Fruit> searchByName(@PathVariable("name") String name){return fruitService.searchByName(name);}
 
     @DeleteMapping("/{id}")
-    public Fruit delete(@PathVariable Long id){return fruitService.delete(id);}
+    public Fruit delete(@PathVariable("id") Long id){return fruitService.delete(id);}
 }
